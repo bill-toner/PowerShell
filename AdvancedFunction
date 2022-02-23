@@ -1,0 +1,21 @@
+cls
+Write-Host "Begin, Process, End, Make Advanced Functions" -BackgroundColor DarkCyan
+Function User-Creation
+{
+    [cmdletbinding()] # Promote a Simple function to an Advanced function
+    Param([Parameter(ValuefromPipeline=$True)] [array] $Collection)
+
+    Begin
+    {
+        Write-Host "User creation process Started`n" -BackgroundColor DarkGreen
+    }
+    Process
+    {
+        New-ADUser -Name $_.Name
+        Write-Host "Creating the User" $_.Name -BackgroundColor DarkGray
+    }
+    End
+    {
+        Write-Host "`nUser creation process completed" -BackgroundColor DarkGreen
+    }
+}
