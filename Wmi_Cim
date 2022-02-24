@@ -1,0 +1,12 @@
+cls 
+Write-Host "Uptime Calculation Using WMI CIM" -BackgroundColor DarkCyan
+$CIM = Get-CIMInstance -Class Win32_OperatingSystem
+$Uptime = $CIM.LocalDateTime - $CIM.LastBootUpTime
+
+Write-Host "It's been $($UpTime.Days) days, $($Uptime.Hours) hours, and $($Uptime.Minutes) minutes since the machine has been rebooted"
+
+Write-Host "Uptime Calculation using WMI" -BackgroundColor DarkCyan
+$WMI = Get-WmiObject -Class Win32_OperatingSystem
+$Uptime1 = $WMI.ConvertToDateTime($WMI.LocalDateTime) - $WMI.ConvertToDateTime($WMI.LastBootUpTime)
+$Uptime1 | Ft Days, Hours, Minutes
+Write-Host "It's been $($UpTime1.Days) days, $($Uptime1.Hours) hours, and $($Uptime1.Minutes) minutes since the machine has been rebooted"
